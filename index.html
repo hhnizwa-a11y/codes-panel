@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة الرموز</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://api.github.com; img-src 'self' data:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#0e6b8c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="الرموز">
+<style>
+:root{--bg:#f4f1ea;--card:#fff;--ink:#1c2140;--soft:#5b6680;--line:#dfe3ec;--brand:#0e6b8c;--ok:#1f7a3f;--warn:#a15c00;--bad:#b42318;--chip:#eef1f7}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1324;--card:#1a2036;--ink:#eef1f7;--soft:#9aa4bd;--line:#2c3550;--brand:#3aa0c4;--ok:#7ddc9b;--warn:#f0b35a;--bad:#ff8a80;--chip:#26304d}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,"Segoe UI",Tahoma,system-ui,sans-serif;font-size:15px;line-height:1.6}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header h1{font-size:20px;margin:0}
+header .note{color:var(--soft);font-size:13px}
+#busy{margin-inline-start:auto;font-weight:700;color:var(--warn)}
+main{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;text-align:right;min-width:210px}
+.tab small{display:block;font-weight:400;color:var(--soft)}
+.tab[aria-selected=true]{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand) inset}
+.tab .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--warn);margin-inline-start:6px;vertical-align:middle}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.card h2{font-size:17px;margin:0 0 10px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.stat{background:var(--chip);border-radius:12px;padding:8px 12px;min-width:92px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:12.5px;color:var(--soft)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+label{font-size:13px;font-weight:700;color:var(--soft)}
+input,select{font:inherit;min-height:42px;padding:8px 10px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}
+input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--brand);outline-offset:1px}
+.btn{font:inherit;font-weight:700;min-height:42px;padding:8px 14px;border-radius:12px;border:0;cursor:pointer;background:var(--chip);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.pri{background:var(--brand);color:#fff}
+.btn.wa{background:#1f8f4e;color:#fff}
+.btn.danger{background:transparent;color:var(--bad);border:1.5px solid var(--bad)}
+.btn.sm{min-height:34px;padding:4px 10px;font-size:13.5px}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.big{font-size:28px;font-weight:800;letter-spacing:.08em;direction:ltr;unicode-bidi:isolate;font-family:Consolas,"Segoe UI",monospace}
+.msg{min-height:24px;font-weight:700;margin-top:8px}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}.msg.warn{color:var(--warn)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.form .full{grid-column:1/-1}
+@media (max-width:560px){.form{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:3px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}
+th{position:sticky;top:0;background:var(--card);color:var(--soft);font-size:12.5px}
+.tablewrap{max-height:62vh;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.code{direction:ltr;unicode-bidi:isolate;font-family:Consolas,monospace;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12.5px;font-weight:700}
+.p-free{background:#e6f4ea;color:#1f7a3f}.p-given{background:#e7f0fb;color:#1d4f91}.p-rev{background:#fdecea;color:#b42318}.p-other{background:var(--chip);color:var(--soft)}
+@media (prefers-color-scheme:dark){.p-free{background:#173a26;color:#7ddc9b}.p-given{background:#1b2d4a;color:#9cc3f5}.p-rev{background:#4a1f1d;color:#ff8a80}}
+.muted{color:var(--soft);font-size:13px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.steps{margin:6px 0 0;padding-inline-start:18px;color:var(--soft);font-size:13.5px}
+dialog{border:0;border-radius:18px;padding:18px;max-width:440px;width:92vw;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,14,30,.55)}
+#lock{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.lockcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;width:100%;max-width:420px;display:flex;flex-direction:column;gap:8px}
+.lockcard h1{font-size:22px;margin:0 0 4px}
+.hbtns{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:640px){
+  header{padding:10px 12px;position:static}header h1{font-size:18px}
+  main{padding:10px}
+  .tab{min-width:0;flex:1 1 100%;padding:8px 12px}
+  .card{padding:12px;border-radius:14px}
+  .big{font-size:23px}
+  .tablewrap{max-height:none;overflow:visible;border:0}
+  table,tbody,tr,td{display:block}thead{display:none}
+  tr{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;padding:8px 10px;background:var(--card)}
+  td{border:0;padding:2px 0}
+  td[data-l]::before{content:attr(data-l) "  ";color:var(--soft);font-size:12px}
+  td:empty{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔑 لوحة الرموز</h1>
+  <span class="note" id="modeNote">على هذا الحاسوب</span>
+  <span class="note" id="syncNote"></span>
+  <span id="busy" role="status" aria-live="polite"></span>
+  <span class="hbtns" id="webBtns" hidden><button class="btn sm" id="btnLink" type="button">📱 ربط جهاز آخر</button><button class="btn sm" id="btnLock" type="button">🔒 قفل</button></span>
+</header>
+<main>
+  <div class="tabs" role="tablist" id="tabs"></div>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="hGive">
+      <h2 id="hGive">استدعاء رمز وتسليمه</h2>
+      <div class="row"><button class="btn pri" id="btnNext" type="button">🎟️ استدعِ الرمز التالي</button>
+        <span class="muted" id="freeHint"></span></div>
+      <div id="giveBox" hidden>
+        <p class="muted" style="margin:10px 0 0">الرمز <span id="gSerial" class="ltr"></span></p>
+        <div class="big" id="gCode"></div>
+        <div class="form">
+          <div class="field"><label for="gName">اسم المشتري</label><input id="gName" autocomplete="off" required></div>
+          <div class="field"><label for="gPhone">رقم الهاتف</label><input id="gPhone" inputmode="tel" autocomplete="off" placeholder="9xxxxxxx" dir="ltr"></div>
+          <div class="full row"><button class="btn pri" id="btnGive" type="button">✅ سلِّم الرمز لهذا المشتري</button>
+            <button class="btn" id="btnCancelGive" type="button">إلغاء</button></div>
+        </div>
+      </div>
+      <div id="doneBox" hidden>
+        <p class="muted" style="margin:10px 0 0">سُلِّم إلى <b id="dName"></b> <span id="dPhone" class="ltr"></span></p>
+        <div class="big" id="dCode"></div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn" id="btnCopyCode" type="button">📋 نسخ الرمز</button>
+          <button class="btn" id="btnCopyMsg" type="button">📋 نسخ الرسالة</button>
+          <a class="btn wa" id="btnWa" target="_blank" rel="noopener">واتساب المشتري</a>
+        </div>
+      </div>
+      <div class="msg" id="giveMsg" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card" aria-labelledby="hProd">
+      <h2 id="hProd">الحالة والرفع</h2>
+      <div class="stats" id="stats"></div>
+      <div class="row">
+        <button class="btn pri" id="btnPublish" type="button">⬆️ رفع إلى GitHub</button>
+        <a class="btn" id="siteLink" target="_blank" rel="noopener">🔗 فتح التطبيق</a>
+      </div>
+      <p class="muted" id="pubNote" style="margin:8px 0 0"></p>
+      <div id="pcOnly">
+      <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+      <div class="row">
+        <label for="nNew">صنع رموز جديدة</label>
+        <input id="nNew" type="number" min="1" max="500" value="30" style="width:96px">
+        <button class="btn" id="btnBatch" type="button">➕ اصنع</button>
+      </div>
+      </div>
+      <div class="msg" id="opMsg" role="status" aria-live="polite"></div>
+      <ul class="steps" id="steps"></ul>
+    </section>
+  </div>
+
+  <section class="card" aria-labelledby="hList">
+    <h2 id="hList">كل الرموز</h2>
+    <div class="row" style="margin-bottom:8px">
+      <input id="search" type="search" placeholder="بحث بالاسم أو الهاتف أو الرقم أو الرمز" style="flex:1 1 260px" aria-label="بحث">
+      <select id="filter" aria-label="تصفية">
+        <option value="all">الكل</option><option value="free">متاح</option><option value="given">مُسلَّم</option><option value="revoked">ملغى</option>
+      </select>
+      <span class="muted" id="count"></span>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>الرقم</th><th>الرمز</th><th>الحالة</th><th>الاسم</th><th>الهاتف</th><th>تاريخ التسليم</th><th></th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+  </section>
+</main>
+
+<div id="lock" hidden>
+  <div class="lockcard">
+    <h1>🔑 لوحة الرموز</h1>
+    <div id="setupBox" hidden style="display:flex;flex-direction:column;gap:8px">
+      <p class="muted" style="margin:0">أوّل مرّة على هذا الجهاز: الصق مفتاح GitHub الخاصّ بمستودع codes-data، واختر رقمًا سرّيًّا تفتح به اللوحة.</p>
+      <label for="sTok">مفتاح GitHub</label><input id="sTok" type="password" autocomplete="off" dir="ltr" placeholder="github_pat_…">
+      <label for="sPin">رقم سرّي جديد (6 أرقام أو أكثر)</label><input id="sPin" type="password" inputmode="numeric" autocomplete="new-password" dir="ltr">
+      <label for="sPin2">أعد كتابة الرقم السرّي</label><input id="sPin2" type="password" inputmode="numeric" autocomplete="new-password" dir="ltr">
+      <button class="btn pri" id="btnSetup" type="button">حفظ وفتح</button>
+    </div>
+    <div id="pinBox" hidden style="display:flex;flex-direction:column;gap:8px">
+      <p class="muted" style="margin:0" id="pinHint">اكتب رقمك السرّي لفتح اللوحة.</p>
+      <label for="uPin">الرقم السرّي</label><input id="uPin" type="password" inputmode="numeric" autocomplete="current-password" dir="ltr">
+      <button class="btn pri" id="btnUnlock" type="button">فتح</button>
+      <button class="btn sm" id="btnForget" type="button" style="align-self:flex-start">نسيان هذا الجهاز</button>
+    </div>
+    <div class="msg" id="lockMsg" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <h2 style="margin-top:0;font-size:17px" id="dlgT"></h2>
+  <p id="dlgP" class="muted"></p>
+  <div class="form" id="dlgForm" hidden>
+    <div class="field"><label for="eName">الاسم</label><input id="eName"></div>
+    <div class="field"><label for="ePhone">الهاتف</label><input id="ePhone" dir="ltr" inputmode="tel"></div>
+  </div>
+  <div class="row" style="margin-top:12px"><button class="btn pri" id="dlgOk" type="button">تأكيد</button><button class="btn" id="dlgNo" type="button">إلغاء</button></div>
+</dialog>
+
+<script>
+(function(){
+'use strict';
+var TOKEN='__TOKEN__', META={"ep-student":{"label":"EnglishPath — الطالب","file":"ep-student.csv","re":"^EP\\d+,","active":"active","revoked":"revoked","site":"https://hhnizwa-a11y.github.io/english-path/","nameInSite":false,"msg":"شكرًا لشرائكم تطبيق EnglishPath — مسار اللغة الإنجليزية (نسخة الطالب)."},"ep-teacher":{"label":"EnglishPath — المعلّم","file":"ep-teacher.csv","re":"^EPT\\d+,","active":"active","revoked":"revoked","site":"https://hhnizwa-a11y.github.io/english-path-teacher/","nameInSite":false,"msg":"شكرًا لشرائكم نسخة المعلّم من تطبيق EnglishPath — مسار اللغة الإنجليزية."},"eif":{"label":"English is fun","file":"eif.csv","re":"^RB\\d+,","active":"web","revoked":"web-revoked","site":"https://hhnizwa-a11y.github.io/english-is-fun/","nameInSite":true,"msg":"شكرًا لشرائكم حزمة «English is fun» للصف الأول."}}, $=function(id){return document.getElementById(id)};
+var WEB=TOKEN.indexOf('__TOK')===0;              // بلا خادم الحاسوب: لوحة الإنترنت تقرأ المستودع الخاصّ مباشرة
+var STORE={owner:'hhnizwa-a11y',repo:'codes-data',branch:'main'}, LSK='codes-panel-v1';
+var cur=null, products={}, rows=[], pick=null, lastText='', lastCode='';
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]})}
+function say(el,t,k){$(el).textContent=t||'';$(el).className='msg'+(k?' '+k:'')}
+function setBusy(t){$('busy').textContent=t?('⏳ '+t+'…'):'';['btnPublish','btnBatch','btnNext','btnGive'].forEach(function(id){$(id).disabled=!!t})}
+function fmtDate(s){if(!s)return '';try{return new Date(s).toLocaleString('ar-OM-u-nu-latn',{dateStyle:'medium',timeStyle:'short'})}catch(e){return s}}
+function copy(t){return navigator.clipboard.writeText(t).then(function(){return true},function(){return false})}
+// أرقام الهاتف: لوحة مفاتيح الهاتف قد تكتب أرقامًا عربيّة فتُحوَّل إلى 0-9
+function digits(s){return String(s||'').replace(/[٠-٩]/g,function(c){return String(c.charCodeAt(0)-0x660)}).replace(/[۰-۹]/g,function(c){return String(c.charCodeAt(0)-0x6f0)}).replace(/[^\d]/g,'').replace(/^00/,'')}
+function waPhone(s){var d=digits(s);return d.length===8?'968'+d:d}
+function buyerText(p,code){var m=META[p];return 'السلام عليكم ورحمة الله وبركاته،\n'+m.msg+'\n\nرابط التطبيق: '+m.site+'\nرمز التفعيل: '+code+'\n\nافتحوا الرابط، واكتبوا الرمز، ثمّ اضغطوا «تفعيل». هذا الرمز خاصّ بكم.'}
+
+/* ------------------------------------------------ لوحة الإنترنت: GitHub مباشرة بمفتاح محفوظ مشفّرًا برقم سرّي */
+var ghTok=null;
+function b64ToText(b){var bin=atob(String(b).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder('utf-8',{ignoreBOM:true}).decode(u)}  // يحفظ علامة BOM التي يضعها Excel
+function bytesToB64(u){var s='';for(var i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s)}
+function b64ToBytes(b){var bin=atob(b),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u}
+function ghErr(st,j){return st===401?'مفتاح GitHub غير صالح أو انتهت مدّته. اضغط «نسيان هذا الجهاز» ثمّ أدخل مفتاحًا جديدًا.':
+  st===403?'مفتاح GitHub لا يملك صلاحيّة على codes-data (يلزم Contents: Read and write).':
+  st===404?'لم يُعثر على السجلّ في المستودع الخاصّ codes-data.':((j&&j.message)||('خطأ من GitHub ('+st+')'))}
+function gh(method,path,body){
+  return fetch('https://api.github.com/repos/'+STORE.owner+'/'+STORE.repo+path,{method:method,cache:'no-store',
+    headers:Object.assign({Authorization:'Bearer '+ghTok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),
+    body:body?JSON.stringify(body):undefined})
+  .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok){var e=new Error(ghErr(r.status,j));e.status=r.status;throw e}return j})},
+        function(){throw new Error('لا اتّصال بالإنترنت. أعد المحاولة.')})}
+function getFile(name){return gh('GET','/contents/'+name+'?ref='+STORE.branch).then(function(j){return {text:b64ToText(j.content||''),sha:j.sha}})}
+function putFile(name,text,sha,msg){return gh('PUT','/contents/'+name,{message:msg,content:bytesToB64(new TextEncoder().encode(text)),sha:sha,branch:STORE.branch})}
+// تغيير سطر واحد: يُقرأ السجلّ من جديد قبل الكتابة، وإن كتب جهاز آخر في اللحظة نفسها (409) يُعاد من البداية
+function change(name,fn,msg){var n=0;function go(){return getFile(name).then(function(f){var r=fn(f.text);return putFile(name,r.text,f.sha,msg).then(function(){return r.out})})
+  .catch(function(e){if((e.status===409||e.status===422)&&n++<2)return go();throw e})}return go()}
+function webLog(e){e.at=new Date().toISOString();e.by='web';return change('log.json',function(t){var a=[];try{a=JSON.parse(t)}catch(x){}a.push(e);return {text:JSON.stringify(a,null,1)}},'log')
+  .catch(function(){})}
+function csvRow(l){return l.match(/("([^"]|"")*"|[^,]*)(,|$)/g).map(function(x){return x.replace(/,$/,'').replace(/^"|"$/g,'').replace(/""/g,'"')})}
+function q(s){return '"'+String(s).replace(/"/g,'""')+'"'}
+function isPh(n){return !n||/^مشترٍ /.test(n)}
+function parseRows(p,text){var m=META[p],re=new RegExp(m.re),out=[];text.split(/\r?\n/).forEach(function(l){if(!re.test(l))return;var f=csvRow(l);
+  var st=f[6]===m.active?'active':f[6]===m.revoked?'revoked':'other';out.push({serial:f[0],date:f[1],name:isPh(f[2])?'':f[2],phone:f[3],code:f[4],status:st,given:st==='active'&&!isPh(f[2])})});return out}
+function setLine(text,serial,mut){var eol=text.indexOf('\r\n')>=0?'\r\n':'\n',lines=text.split(/\r?\n/),i=-1;
+  for(var k=0;k<lines.length;k++)if(lines[k].indexOf(serial+',')===0){i=k;break}
+  if(i<0)throw new Error('الرقم التسلسليّ غير موجود: '+serial);
+  var f=csvRow(lines[i]);mut(f);lines[i]=[f[0],f[1],q(f[2]),q(f[3]),f[4],f[5],f[6]].join(',');return lines.join(eol)}
+function sha256hex(t){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(t).replace(/\r\n/g,'\n'))).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join('')})}
+function webApi(path,b){
+  var u=new URL(path,location.href),p=u.searchParams.get('p')||(b&&b.p),m=META[p];
+  if(u.pathname.slice(-12)==='/api/summary'){var keys=Object.keys(META);
+    return Promise.all([Promise.all(keys.map(function(k){return getFile(META[k].file)})),getFile('published.json').then(function(f){return JSON.parse(f.text)},function(){return {}})])
+    .then(function(all){var out={};return Promise.all(keys.map(function(k,i){var r=parseRows(k,all[0][i].text),M=META[k];
+      return (M.nameInSite&&all[1][k]?sha256hex(all[0][i].text):Promise.resolve(null)).then(function(h){
+        out[k]={label:M.label,site:M.site,nameInSite:M.nameInSite,active:r.filter(function(x){return x.status==='active'}).length,
+          free:r.filter(function(x){return x.status==='active'&&!x.given}).length,given:r.filter(function(x){return x.given}).length,
+          revoked:r.filter(function(x){return x.status==='revoked'}).length,pending:!!(h&&h!==all[1][k]),lastPublish:null}})})).then(function(){return {products:out,busy:null}})})}
+  if(!m)return Promise.reject(new Error('منتج غير معروف'));
+  var op=u.pathname.slice(u.pathname.lastIndexOf('/api/'));
+  if(op==='/api/codes')return Promise.all([getFile(m.file),getFile('log.json').then(function(f){return JSON.parse(f.text)},function(){return []})]).then(function(a){
+    var when={};a[1].forEach(function(e){if(e.p===p&&e.action==='assign')when[e.serial]=e.at});
+    return {rows:parseRows(p,a[0].text).map(function(r){r.givenAt=when[r.serial]||null;return r})}});
+  if(op==='/api/next')return getFile(m.file).then(function(f){var r=parseRows(p,f.text).find(function(x){return x.status==='active'&&!x.given});
+    if(!r)throw new Error('لا رموز متاحة. اصنع رموزًا جديدة من لوحة الحاسوب.');return {serial:r.serial,code:r.code}});
+  if(op==='/api/assign'){var name=String(b.name||'').trim(),phone=digits(b.phone);
+    if(!name)return Promise.reject(new Error('اكتب اسم المشتري.'));
+    if(phone&&(phone.length<8||phone.length>15))return Promise.reject(new Error('رقم الهاتف غير صحيح.'));
+    return change(m.file,function(t){var r=parseRows(p,t).find(function(x){return x.serial===b.serial});
+      if(!r)throw new Error('الرمز غير موجود.');if(r.status!=='active')throw new Error('هذا الرمز ملغى.');
+      if(r.given&&!b.edit)throw new Error('هذا الرمز سُلِّم من قبل إلى '+r.name+'.');
+      return {text:setLine(t,r.serial,function(f){f[2]=name;f[3]=phone}),out:{ok:true,serial:r.serial,code:r.code}}},(b.edit?'Edit ':'Give ')+b.serial+' (online panel)')
+    .then(function(out){return webLog({p:p,action:b.edit?'edit':'assign',serial:out.serial,name:name,phone:phone}).then(function(){return out})})}
+  if(op==='/api/unassign')return change(m.file,function(t){var r=parseRows(p,t).find(function(x){return x.serial===b.serial});
+      if(!r||!r.given)throw new Error('هذا الرمز غير مُسلَّم.');
+      return {text:setLine(t,r.serial,function(f){f[2]='مشترٍ '+f[0];f[3]=''}),out:{ok:true,was:r.name}}},'Return '+b.serial+' (online panel)')
+    .then(function(out){return webLog({p:p,action:'unassign',serial:b.serial,was:out.was}).then(function(){return out})});
+  return Promise.reject(new Error('صنع الرموز وإلغاؤها والرفع إلى GitHub من لوحة الحاسوب فقط.'))}
+
+function api(path,body){
+  if(WEB)return webApi(path,body);
+  return fetch(path,{method:body?'POST':'GET',headers:Object.assign({'x-token':TOKEN},body?{'content-type':'application/json'}:{}),body:body?JSON.stringify(body):undefined})
+    .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||('خطأ '+r.status));return j})})}
+
+/* ------------------------------------------------ القفل: المفتاح مشفّر بـ AES-GCM بمفتاح مشتقّ من الرقم السرّي (PBKDF2، 310 ألف دورة) */
+function kdf(pin,salt){return crypto.subtle.importKey('raw',new TextEncoder().encode(pin),'PBKDF2',false,['deriveKey']).then(function(k){
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:310000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])})}
+function seal(tok,pin){var salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+  return kdf(pin,salt).then(function(k){return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},k,new TextEncoder().encode(tok))}).then(function(c){
+    return {v:1,s:bytesToB64(salt),i:bytesToB64(iv),c:bytesToB64(new Uint8Array(c))}})}
+function unseal(blob,pin){return kdf(pin,b64ToBytes(blob.s)).then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:b64ToBytes(blob.i)},k,b64ToBytes(blob.c))})
+  .then(function(pt){return new TextDecoder().decode(pt)})}
+function lsGet(){try{return JSON.parse(localStorage.getItem(LSK)||'null')}catch(e){return null}}
+function lsSet(v){try{if(v)localStorage.setItem(LSK,JSON.stringify(v));else localStorage.removeItem(LSK);return true}catch(e){return false}}
+var memBlob=null;                                   // إن رفض المتصفّح الحفظ (تصفّح خاصّ) يبقى في الذاكرة حتى الإغلاق
+function blobNow(){return lsGet()||memBlob}
+function showLock(){$('lock').hidden=false;var has=!!blobNow();$('setupBox').hidden=has;$('pinBox').hidden=!has;say('lockMsg','');(has?$('uPin'):$('sTok')).focus()}
+function opened(){$('lock').hidden=true;$('uPin').value='';$('sPin').value='';$('sPin2').value='';$('sTok').value='';refresh().catch(function(e){say('opMsg',e.message,'bad')})}
+function setupWeb(){
+  $('modeNote').textContent='على الإنترنت · الصنع والإلغاء والرفع من لوحة الحاسوب';
+  $('webBtns').hidden=false;$('pcOnly').hidden=true;$('btnPublish').hidden=true;
+  var m=/#link=([A-Za-z0-9_-]+)/.exec(location.hash);
+  if(m){try{var blob=JSON.parse(atob(m[1].replace(/-/g,'+').replace(/_/g,'/')));if(blob&&blob.v===1){memBlob=blob;lsSet(blob);$('pinHint').textContent='رُبط هذا الجهاز. اكتب الرقم السرّي نفسه الذي اخترته على الجهاز الأوّل.'}}catch(e){}
+    history.replaceState(null,'',location.pathname)}
+  $('btnSetup').onclick=function(){var tok=$('sTok').value.trim(),a=digits($('sPin').value),b2=digits($('sPin2').value);
+    if(!/^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/.test(tok))return say('lockMsg','الصق مفتاح GitHub كاملًا (يبدأ بـ github_pat_).','bad');
+    if(a.length<6)return say('lockMsg','الرقم السرّي 6 أرقام أو أكثر.','bad');
+    if(a!==b2)return say('lockMsg','الرقمان السرّيّان غير متطابقين.','bad');
+    say('lockMsg','⏳ أتحقّق من المفتاح…');ghTok=tok;
+    getFile('ep-student.csv').then(function(){return seal(tok,a)}).then(function(blob){memBlob=blob;
+      if(!lsSet(blob))say('lockMsg','تعذّر الحفظ على هذا الجهاز (التصفّح الخاصّ؟). تعمل اللوحة حتى تغلقها.','warn');opened()})
+      .catch(function(e){ghTok=null;say('lockMsg',e.message,'bad')})};
+  $('btnUnlock').onclick=function(){var blob=blobNow();if(!blob)return showLock();say('lockMsg','⏳');
+    unseal(blob,digits($('uPin').value)).then(function(t){ghTok=t;opened()},function(){say('lockMsg','الرقم السرّي غير صحيح.','bad');$('uPin').select()})};
+  $('uPin').addEventListener('keydown',function(e){if(e.key==='Enter')$('btnUnlock').click()});
+  $('sPin2').addEventListener('keydown',function(e){if(e.key==='Enter')$('btnSetup').click()});
+  $('btnForget').onclick=function(){if(!confirm('نسيان مفتاح GitHub على هذا الجهاز؟ تحتاج بعدها لصق المفتاح من جديد أو رابط ربط.'))return;lsSet(null);memBlob=null;ghTok=null;showLock()};
+  $('btnLock').onclick=function(){ghTok=null;rows=[];products={};$('tbody').innerHTML='';$('tabs').innerHTML='';$('stats').innerHTML='';resetGive();showLock()};
+  $('btnLink').onclick=function(){var blob=blobNow();if(!blob)return;
+    var link=location.origin+location.pathname+'#link='+btoa(JSON.stringify(blob)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    copy(link).then(function(ok){
+      ask('ربط جهاز آخر',(ok?'نُسخ رابط الربط. ':'انسخ هذا الرابط: '+link+'\n\n')+'أرسله لنفسك وافتحه على الجهاز الآخر، ثمّ اكتب رقمك السرّي نفسه. المفتاح داخل الرابط مشفّر برقمك السرّي، فلا ترسله لأحد.')})};
+  // يُقفل وحده بعد 10 دقائق في الخلفيّة
+  var hiddenAt=0;document.addEventListener('visibilitychange',function(){if(document.hidden)hiddenAt=Date.now();else if(ghTok&&Date.now()-hiddenAt>600000)$('btnLock').click()});
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+  showLock();
+}
+
+/* ------------------------------------------------ الواجهة (مشتركة) */
+function loadSummary(){
+  return api('/api/summary').then(function(j){products=j.products;if(!cur||!products[cur]){cur=Object.keys(products)[0]}drawTabs();drawStats();setBusy(j.busy);
+    if(j.sync){$('syncNote').textContent=j.sync.ok===false?('⚠️ '+j.sync.note):j.sync.ok?'· متزامنة مع لوحة الإنترنت':'';$('syncNote').style.color=j.sync.ok===false?'var(--warn)':''}})}
+function drawTabs(){
+  $('tabs').innerHTML=Object.keys(products).map(function(k){var p=products[k];
+    return '<button class="tab" role="tab" data-k="'+k+'" aria-selected="'+(k===cur)+'">'+esc(p.label)+(p.pending?'<span class="dot" title="يحتاج رفعًا"></span>':'')+
+      '<small>'+(p.error?esc(p.error):('متاح '+p.free+' · مُسلَّم '+p.given))+'</small></button>'}).join('');
+  Array.prototype.forEach.call($('tabs').children,function(b){b.onclick=function(){cur=b.dataset.k;resetGive();drawTabs();drawStats();loadRows().catch(function(e){say('giveMsg',e.message,'bad')})}})}
+function drawStats(){var p=products[cur];if(!p)return;
+  if(p.error){$('stats').innerHTML='<span class="msg bad">'+esc(p.error)+'</span>';return}
+  $('stats').innerHTML=[['متاح للتسليم',p.free],['مُسلَّم',p.given],['فعّال (الكل)',p.active],['ملغى',p.revoked]].map(function(s){return '<div class="stat"><b>'+s[1]+'</b><span>'+s[0]+'</span></div>'}).join('');
+  $('freeHint').textContent=p.free?('المتاح: '+p.free+' رمزًا'):'لا رموز متاحة — اصنع رموزًا جديدة';
+  $('siteLink').href=p.site;
+  if(WEB){$('pubNote').innerHTML=p.nameInSite?(p.pending?'<b style="color:var(--warn)">⚠️ سلّمت رموزًا لم تُرفع بعد.</b> افتح لوحة الحاسوب واضغط «رفع إلى GitHub» ليظهر اسم المشتري داخل التطبيق.':'✅ الموقع محدَّث.'):
+    'الرمز يعمل فور تسليمه، ولا يحتاج رفعًا. صنع رموز جديدة وإلغاؤها من لوحة الحاسوب.';return}
+  $('pubNote').innerHTML=(p.pending?'<b style="color:var(--warn)">⚠️ توجد تغييرات لم تُرفع بعد.</b> ':'✅ الموقع محدَّث. ')+
+    (p.lastPublish?'آخر رفع: '+esc(fmtDate(p.lastPublish))+'. ':'')+
+    (p.nameInSite?'في هذه الحزمة يظهر اسم المشتري داخل التطبيق، فارفع بعد التسليم ليظهر.':'تسليم الرمز لا يحتاج رفعًا؛ الرفع يلزم بعد صنع رموز جديدة أو إلغاء رمز.')}
+function loadRows(){return api('/api/codes?p='+cur).then(function(j){rows=j.rows;drawRows()})}
+function statusOf(r){return r.status==='revoked'?'revoked':r.status!=='active'?'other':r.given?'given':'free'}
+function drawRows(){
+  var qv=$('search').value.trim().toLowerCase(),f=$('filter').value,qd=digits(qv);
+  var list=rows.filter(function(r){var s=statusOf(r);if(f!=='all'&&s!==f)return false;
+    if(!qv)return true;var hay=(r.serial+' '+r.code+' '+r.name+' '+r.phone).toLowerCase();return hay.indexOf(qv)>=0||(qd.length>=3&&String(r.phone).indexOf(qd)>=0)});
+  $('count').textContent=list.length+' من '+rows.length;
+  var label={free:'<span class="pill p-free">متاح</span>',given:'<span class="pill p-given">مُسلَّم</span>',revoked:'<span class="pill p-rev">ملغى</span>',other:'<span class="pill p-other">ملف</span>'};
+  $('tbody').innerHTML=list.slice(0,600).map(function(r){var s=statusOf(r);
+    var act=s==='free'?'<button class="btn sm" data-a="give" data-s="'+esc(r.serial)+'">تسليم</button>':
+      s==='given'?'<button class="btn sm" data-a="edit" data-s="'+esc(r.serial)+'">تعديل</button> <button class="btn sm" data-a="back" data-s="'+esc(r.serial)+'">إرجاع</button>':'';
+    if(s==='free'||s==='given'){act+=' <button class="btn sm" data-a="copy" data-s="'+esc(r.serial)+'">نسخ</button>';
+      if(!WEB)act+=' <button class="btn sm danger" data-a="revoke" data-s="'+esc(r.serial)+'">إلغاء</button>'}
+    return '<tr><td class="ltr" data-l="الرقم">'+esc(r.serial)+'</td><td class="code" data-l="الرمز">'+esc(r.code)+'</td><td>'+label[s]+'</td><td data-l="الاسم">'+esc(r.name)+
+      '</td><td class="ltr" data-l="الهاتف">'+esc(r.phone)+'</td><td class="muted" data-l="سُلِّم">'+esc(fmtDate(r.givenAt))+'</td><td>'+act+'</td></tr>'}).join('')}
+$('search').oninput=drawRows;$('filter').onchange=drawRows;
+$('tbody').onclick=function(e){var b=e.target.closest('button[data-a]');if(!b)return;var r=rows.find(function(x){return x.serial===b.dataset.s});if(!r)return;
+  if(b.dataset.a==='give'){pick={serial:r.serial,code:r.code};showGive();$('gName').focus();window.scrollTo({top:0,behavior:'smooth'})}
+  if(b.dataset.a==='copy'){copy(r.code).then(function(ok){say('giveMsg',ok?'نُسخ الرمز '+r.code:'تعذّر النسخ',ok?'ok':'bad')})}
+  if(b.dataset.a==='edit'){ask('تعديل بيانات '+r.serial,'',true,r).then(function(v){if(!v)return;setBusy('حفظ');
+    api('/api/assign',{p:cur,serial:r.serial,name:v.name,phone:digits(v.phone),edit:true}).then(function(){setBusy('');return refresh()}).then(function(){say('giveMsg','عُدِّلت بيانات '+r.serial,'ok')}).catch(function(err){setBusy('');say('giveMsg',err.message,'bad')})})}
+  if(b.dataset.a==='back'){ask('إرجاع الرمز '+r.serial+' إلى المتاح؟','يُمسح اسم '+r.name+' ورقمه من السجلّ. الرمز نفسه يبقى صالحًا.').then(function(v){if(!v)return;setBusy('حفظ');
+    api('/api/unassign',{p:cur,serial:r.serial}).then(function(){setBusy('');return refresh()}).then(function(){say('giveMsg','أُرجع '+r.serial+' إلى المتاح','ok')}).catch(function(err){setBusy('');say('giveMsg',err.message,'bad')})})}
+  if(b.dataset.a==='revoke'){ask('إلغاء الرمز '+r.serial+'؟','لن يفتح هذا الرمز التطبيق بعد الرفع إلى GitHub'+(r.name?(' (صاحبه: '+r.name+')'):'')+'. لا يمكن التراجع عن الإلغاء.').then(function(v){if(!v)return;
+    setBusy('إلغاء الرمز');api('/api/revoke',{p:cur,serial:r.serial}).then(function(){setBusy('');return refresh()}).then(function(){say('opMsg','أُلغي '+r.serial+'. ارفع إلى GitHub ليسري الإلغاء.','warn')}).catch(function(err){setBusy('');say('opMsg',err.message,'bad')})})}};
+
+function resetGive(){pick=null;$('giveBox').hidden=true;$('doneBox').hidden=true;say('giveMsg','')}
+function showGive(){$('doneBox').hidden=true;$('giveBox').hidden=false;$('gSerial').textContent=pick.serial;$('gCode').textContent=pick.code;$('gName').value='';$('gPhone').value='';say('giveMsg','')}
+$('btnNext').onclick=function(){setBusy('استدعاء');api('/api/next',{p:cur}).then(function(j){setBusy('');pick=j;showGive();$('gName').focus()}).catch(function(e){setBusy('');say('giveMsg',e.message,'bad')})};
+$('btnCancelGive').onclick=resetGive;
+$('btnGive').onclick=function(){if(!pick)return;var name=$('gName').value.trim(),phone=digits($('gPhone').value);
+  if(!name){say('giveMsg','اكتب اسم المشتري.','bad');$('gName').focus();return}
+  setBusy('تسليم');
+  api('/api/assign',{p:cur,serial:pick.serial,name:name,phone:phone}).then(function(j){setBusy('');
+    lastCode=j.code;lastText=buyerText(cur,j.code);$('giveBox').hidden=true;$('doneBox').hidden=false;$('dName').textContent=name;$('dPhone').textContent=phone;$('dCode').textContent=j.code;
+    if(phone){$('btnWa').hidden=false;$('btnWa').href='https://wa.me/'+waPhone(phone)+'?text='+encodeURIComponent(lastText)}else $('btnWa').hidden=true;
+    say('giveMsg','✅ سُجِّل الرمز '+j.serial+' باسم '+name+(products[cur].nameInSite?(WEB?' — ارفع من لوحة الحاسوب ليظهر الاسم في التطبيق.':' — ارفع إلى GitHub ليظهر الاسم في التطبيق.'):'.'),'ok');pick=null;return refresh()})
+  .catch(function(e){setBusy('');say('giveMsg',e.message,'bad')})};
+['gName','gPhone'].forEach(function(id){$(id).addEventListener('keydown',function(e){if(e.key==='Enter')$('btnGive').click()})});
+$('btnCopyCode').onclick=function(){copy(lastCode).then(function(ok){say('giveMsg',ok?'نُسخ الرمز':'تعذّر النسخ',ok?'ok':'bad')})};
+$('btnCopyMsg').onclick=function(){copy(lastText).then(function(ok){say('giveMsg',ok?'نُسخت الرسالة كاملة (الرابط والرمز والخطوات)':'تعذّر النسخ',ok?'ok':'bad')})};
+$('btnBatch').onclick=function(){var n=parseInt($('nNew').value,10);if(!(n>=1&&n<=500))return say('opMsg','العدد من 1 إلى 500.','bad');
+  ask('صنع '+n+' رمزًا جديدًا لـ '+products[cur].label+'؟','قد يستغرق ذلك دقيقة أو أكثر. بعدها ارفع إلى GitHub لتعمل الرموز.').then(function(v){if(!v)return;
+  setBusy('صنع '+n+' رمزًا');$('steps').innerHTML='';api('/api/batch',{p:cur,n:n}).then(function(j){setBusy('');say('opMsg','✅ صُنع '+j.made+' رمزًا. ارفع إلى GitHub لتعمل.','ok');return refresh()}).catch(function(e){setBusy('');say('opMsg',e.message,'bad')})})};
+$('btnPublish').onclick=function(){ask('رفع '+products[cur].label+' إلى GitHub؟','يُبنى التطبيق من السجلّ ثمّ يُرفع إلى موقعه العامّ. الرموز داخله مشفّرة؛ سجلّ الأسماء والأرقام لا يُرفع إلى الموقع.').then(function(v){if(!v)return;
+  setBusy('بناء ورفع');$('steps').innerHTML='';say('opMsg','');api('/api/publish',{p:cur}).then(function(j){setBusy('');
+    $('steps').innerHTML=j.steps.map(function(s){return '<li>'+esc(s)+'</li>'}).join('');say('opMsg','✅ تمّ. يظهر التحديث على الرابط خلال دقيقة أو دقيقتين.','ok');return refresh()})
+  .catch(function(e){setBusy('');say('opMsg',e.message,'bad')})})};
+
+function ask(title,text,form,r){return new Promise(function(res){var d=$('dlg');$('dlgT').textContent=title;$('dlgP').textContent=text||'';$('dlgP').hidden=!text;
+  $('dlgForm').hidden=!form;if(form){$('eName').value=r.name||'';$('ePhone').value=r.phone||''}
+  $('dlgOk').onclick=function(){if(form&&!$('eName').value.trim()){$('eName').focus();return}d.close();res(form?{name:$('eName').value.trim(),phone:$('ePhone').value.trim()}:true)};
+  $('dlgNo').onclick=function(){d.close();res(false)};d.onclose=function(){};d.showModal();(form?$('eName'):$('dlgOk')).focus()})}
+function refresh(){return loadSummary().then(loadRows)}
+if(WEB)setupWeb();else refresh().catch(function(e){say('opMsg',e.message,'bad')});
+})();
+</script>
+</body>
+</html>
