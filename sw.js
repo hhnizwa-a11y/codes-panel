@@ -1,5 +1,5 @@
 // يحفظ واجهة اللوحة فقط (لا بيانات). الصفحة من الشبكة أوّلًا؛ GitHub API لا يمرّ من هنا.
-const C = 'codes-panel-b7e6372a74', FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
+const C = 'codes-panel-17cedbdada', FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(C).then(c => c.addAll(FILES))); });
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('codes-panel-') && k !== C).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {

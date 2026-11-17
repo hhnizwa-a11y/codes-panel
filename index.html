@@ -301,7 +301,7 @@ function setupWeb(){
     say('lockMsg','⏳ أتحقّق من المفتاح…');ghTok=tok;
     getFile('ep-student.csv').then(function(){return seal(tok,a)}).then(function(blob){memBlob=blob;
       if(!lsSet(blob))say('lockMsg','تعذّر الحفظ على هذا الجهاز (التصفّح الخاصّ؟). تعمل اللوحة حتى تغلقها.','warn');opened()})
-      .catch(function(e){ghTok=null;say('lockMsg',e.message,'bad')})};
+      .catch(function(e){ghTok=null;say('lockMsg',e.status===401?'المفتاح غير صالح. انسخه كاملًا من GitHub (يظهر مرّة واحدة عند إنشائه).':e.message,'bad')})};
   $('btnUnlock').onclick=function(){var blob=blobNow();if(!blob)return showLock();say('lockMsg','⏳');
     unseal(blob,digits($('uPin').value)).then(function(t){ghTok=t;opened()},function(){say('lockMsg','الرقم السرّي غير صحيح.','bad');$('uPin').select()})};
   $('uPin').addEventListener('keydown',function(e){if(e.key==='Enter')$('btnUnlock').click()});
